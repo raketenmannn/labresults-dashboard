@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard Gesundheitsdaten</title>
+    <meta name="theme-color" content="#174c3c">
+    <link rel="icon" href="./favicon.svg?v=20260903-radiology-finding1" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png?v=20260903-radiology-finding1">
+    <link rel="manifest" href="./site.webmanifest?v=20260903-radiology-finding1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css?v=20260903-radiology-finding1">
+  </head>
+  <body class="view-home">
+    <section id="authGate" class="authGate" hidden>
+      <form id="authForm" class="authCard">
+        <span class="authEyebrow">Geschützte Ansicht</span>
+        <h2>Labordaten entsperren</h2>
+        <p>Gib das Kennwort ein, um die verschlüsselten Messwerte und Laborberichte in diesem Browser zu entschlüsseln.</p>
+        <label>
+          <span>Kennwort</span>
+          <input id="authPassword" type="password" autocomplete="current-password" required>
+        </label>
+        <label class="authRemember">
+          <input id="authRemember" type="checkbox">
+          <span>Auf diesem Gerät eingeloggt bleiben</span>
+        </label>
+        <button type="submit">Entsperren</button>
+        <div id="authMessage" class="authMessage" role="status"></div>
+      </form>
+    </section>
+
+    <header class="topbar">
+      <div>
+        <h1>Gesundheitsdaten</h1>
+        <p id="datasetMeta">Lade Datenbank...</p>
+      </div>
+      <div class="statusPills">
+        <span id="recordCount">0 Werte</span>
+        <a id="sourceCount" href="#berichte" aria-label="Laborberichte öffnen">0 Laborberichte</a>
+      </div>
+    </header>
+
+    <nav class="viewTabs" aria-label="Dashboard-Bereiche">
+      <button class="viewTab active" type="button" data-view="home">Home</button>
+      <button class="viewTab" type="button" data-view="start">Labor</button>
+      <button class="viewTab" type="button" data-view="berichte">Berichte</button>
+      <button class="viewTab" type="button" data-view="haematologie">Blutbild</button>
+      <button class="viewTab" type="button" data-view="organe">Organe</button>
+      <button class="viewTab" type="button" data-view="stoffwechsel">Stoffwechsel</button>
+      <button class="viewTab" type="button" data-view="immunologie">Immunologie</button>
+      <button class="viewTab" type="button" data-view="autoantikoerper">Auto-AK</button>
+      <button class="viewTab" type="button" data-view="mikrobiom">Mikrobiom</button>
+      <button class="viewTab" type="button" data-view="alter">Alter</button>
+    </nav>
+
+    <main id="landingView" class="landingView appView">
+      <section class="landingHero">
+        <div>
+          <span class="topicEyebrow">Übersicht</span>
+          <h2>Dashboard Gesundheitsdaten</h2>
+          <p>Dein zentraler Einstieg in Messwerte, Laborberichte, Befunde und Testberichte.</p>
+        </div>
+        <div class="landingHeroStats" aria-label="Aktueller Datenstand">
+          <span><strong id="landingValueCount">0</strong> Messwerte</span>
+          <span><strong id="landingReportCount">0</strong> Laborberichte</span>
+        </div>
+      </section>
+
+      <section class="landingActions" aria-label="Gesundheitsdaten-Bereiche">
+        <a class="landingAction primary" href="#start" data-view-link="start">
+          <span class="landingIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 19h16M6 16l3.5-4 3 2.8L18 6M18 6v5M18 6h-5"></path></svg>
+          </span>
+          <span>
+            <strong>Labordaten</strong>
+            <small>Messwerte suchen, Verläufe prüfen und die Gesamttabelle exportieren.</small>
+          </span>
+        </a>
+        <a class="landingAction" href="#berichte" data-view-link="berichte">
+          <span class="landingIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7zM14 3v5h4M9 13h6M9 17h6"></path></svg>
+          </span>
+          <span>
+            <strong>Laborberichte</strong>
+            <small>Chronologisches Archiv mit direktem PDF-Zugriff.</small>
+          </span>
+        </a>
+        <a class="landingAction" href="#befunde" data-view-link="befunde">
+          <span class="landingIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M9 4h6M9 2h6v4H9zM6 5H5v16h14V5h-1M8 12h8M8 16h5"></path></svg>
+          </span>
+          <span>
+            <strong>Befunde</strong>
+            <small>Arztbriefe und qualitative Befunde nach Fachgebiet.</small>
+          </span>
+        </a>
+        <a class="landingAction" href="#allergien" data-view-link="allergien">
+          <span class="landingIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3 4 7v6c0 4.4 3.1 7.2 8 8 4.9-.8 8-3.6 8-8V7zM9 12l2 2 4-5"></path></svg>
+          </span>
+          <span>
+            <strong>Allergie- und Unverträglichkeitstests</strong>
+            <small>Testberichte und Reaktionsmuster gesammelt an einem Ort.</small>
+          </span>
+        </a>
+        <a class="landingAction" href="#alter" data-view-link="alter">
+          <span class="landingIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3v18M7 7h10M7 17h10M5 12h14M4 12a8 8 0 0 1 16 0 8 8 0 0 1-16 0"></path></svg>
+          </span>
+          <span>
+            <strong>Biologisches Alter</strong>
+            <small>Biologisches Alter aus passenden Blutwerten.</small>
+          </span>
+        </a>
+      </section>
+    </main>
+
+    <section id="labSheetHero" class="topicHero labSheetHero appView" hidden>
+      <div>
+        <span class="topicEyebrow">Labordaten</span>
+        <h2>Labordaten</h2>
+        <p>Messwerte suchen, Verläufe prüfen oder alle Daten in einer vollständigen Tabelle exportieren.</p>
+      </div>
+      <div class="labSheetHeroActions">
+        <div class="labSheetSwitch ageModelSwitch" role="tablist" aria-label="Labordaten-Ansicht">
+          <button class="active" type="button" data-lab-sheet="labor" role="tab" aria-selected="true">Verlaufswerte</button>
+          <button type="button" data-lab-sheet="values" role="tab" aria-selected="false">Detailliste</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="allValuesView" class="allValuesView appView" hidden>
+      <section class="topicPanel allValuesPanel">
+        <div class="sectionTitle">
+          <span>Alle Messwerte</span>
+          <div id="allValuesStats" class="allValuesStatsCompact"></div>
+        </div>
+        <div class="allValuesToolbar">
+          <label class="allValuesSearchField">
+            <span>Liste durchsuchen</span>
+            <input id="allValuesSearch" type="search" placeholder="z. B. FT3, Diamedis, Methylmalonsäure" autocomplete="off">
+          </label>
+          <label class="allValuesSortField">
+            <span>Sortierung</span>
+            <select id="allValuesSort">
+              <option value="dateDesc">Neueste zuerst</option>
+              <option value="dateAsc">Älteste zuerst</option>
+              <option value="nameAsc">Name A bis Z</option>
+              <option value="nameDesc">Name Z bis A</option>
+              <option value="labAsc">Labor A bis Z</option>
+              <option value="status">Auffällige zuerst</option>
+            </select>
+          </label>
+          <div class="allValuesExport">
+            <span>Export</span>
+            <div class="allValuesExportButtons">
+              <button id="allValuesExportExcel" class="smallButton" type="button">Excel</button>
+              <button id="allValuesExportCsv" class="smallButton" type="button">CSV</button>
+              <button id="allValuesExportPdf" class="smallButton" type="button">PDF</button>
+            </div>
+          </div>
+        </div>
+        <div class="sectionTitle allValuesTableTitle">
+          <span>Messwertliste</span>
+          <strong id="allValuesCount">0</strong>
+        </div>
+        <div class="allValuesTableWrap">
+          <table class="allValuesTable">
+            <thead>
+              <tr>
+                <th>Datum</th>
+                <th>Labor</th>
+                <th>Dokumentkategorie</th>
+                <th>Abschnitt</th>
+                <th>Kategorie</th>
+                <th>Name im Bericht</th>
+                <th>Standardname</th>
+                <th>Ergebnis</th>
+                <th>Ergebnis Text</th>
+                <th>Qualifikator</th>
+                <th>Einheit</th>
+                <th>Referenzbereich</th>
+                <th>Ref. min</th>
+                <th>Ref. max</th>
+                <th>Bewertung</th>
+                <th>Methode</th>
+                <th>Kommentar</th>
+                <th>Quelldatei</th>
+                <th>Seite</th>
+                <th>Verlaufsgruppe</th>
+                <th>Suchaliase</th>
+                <th>Messungen Gruppe</th>
+                <th>Dokumentlink</th>
+              </tr>
+            </thead>
+            <tbody id="allValuesRows"></tbody>
+          </table>
+        </div>
+        <button id="allValuesMore" class="smallButton allValuesMore" type="button" hidden>Weitere Werte anzeigen</button>
+      </section>
+    </section>
+
+    <section id="ageView" class="ageView appView" hidden>
+      <section class="topicHero ageHero">
+        <div>
+          <span id="bioAgeEyebrow" class="topicEyebrow">PhenoAge</span>
+          <h2>Biologisches Alter</h2>
+          <p id="bioAgeSubtitle">Berechnung aus neun klinischen Markern plus chronologischem Alter, mit automatischer Wertauswahl aus der Labordatenbank.</p>
+          <div class="ageModelSwitch" role="tablist" aria-label="Modell für biologisches Alter">
+            <button class="active" type="button" data-bio-age-model="phenoage" role="tab" aria-selected="true">PhenoAge</button>
+            <button type="button" data-bio-age-model="bortz" role="tab" aria-selected="false">Bortz Blood Age</button>
+          </div>
+        </div>
+        <div id="bioAgeStats" class="topicStats"></div>
+      </section>
+
+      <section class="ageGrid">
+        <form id="bioAgeForm" class="topicPanel ageFormPanel">
+          <div class="sectionTitle">
+            <span>Eingangswerte</span>
+            <button id="bioAgeAutofill" class="smallButton" type="button">Neueste Werte übernehmen</button>
+          </div>
+          <div class="ageIdentityGrid">
+            <label class="ageField">
+              <span>Geburtsdatum</span>
+              <input id="bioBirthDate" type="date" autocomplete="bday">
+            </label>
+            <label class="ageField">
+              <span>Chronologisches Alter</span>
+              <input id="bioChronAge" type="number" inputmode="decimal" min="18" max="110" step="0.1" placeholder="Jahre">
+            </label>
+          </div>
+          <div id="bioAgeInputs" class="ageMarkerGrid"></div>
+          <div class="ageFormActions">
+            <button id="bioAgeSave" class="primarySmallButton" type="button">Manuelle Werte merken</button>
+            <button id="bioAgeClear" class="smallButton" type="button">Lokale Eingaben löschen</button>
+          </div>
+        </form>
+
+        <aside class="topicPanel ageResultPanel">
+          <div class="sectionTitle">
+            <span>Ergebnis</span>
+            <strong id="bioAgeCompleteness">0/0</strong>
+          </div>
+          <div id="bioAgeResult" class="ageResult"></div>
+        </aside>
+      </section>
+
+      <section class="topicPanel ageSourcesPanel">
+        <div class="sectionTitle">
+          <span>Verwendete Werte</span>
+          <strong id="bioAgeSourceCount">0</strong>
+        </div>
+        <div id="bioAgeSources" class="ageSourceList"></div>
+      </section>
+    </section>
+
+    <main id="explorerView" class="layout appView" hidden>
+      <aside class="sidebar">
+        <div class="field searchField">
+          <label for="searchInput"><span>Laborwert suchen</span></label>
+          <input id="searchInput" type="search" placeholder="z. B. Vitamin B6, CRP, TSH" autocomplete="off" aria-autocomplete="list" aria-controls="searchSuggest" aria-expanded="false">
+          <div id="searchSuggest" class="searchSuggest" role="listbox" hidden></div>
+        </div>
+
+        <section class="dateFilter">
+          <div class="sectionTitle">
+            <span>Verlauf Zeitraum</span>
+            <button id="dateFilterToggle" class="smallButton" type="button">Ändern</button>
+          </div>
+          <div id="dateRangeLabel" class="dateRangeLabel">Alle Daten</div>
+          <div id="datePopover" class="datePopover" hidden>
+            <label>
+              <span>Von</span>
+              <input id="dateStartInput" type="date">
+            </label>
+            <label>
+              <span>Bis</span>
+              <input id="dateEndInput" type="date">
+            </label>
+            <div class="dateActions">
+              <button id="dateReset" class="smallButton" type="button">Reset</button>
+              <button id="dateApply" class="primarySmallButton" type="button">Übernehmen</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="matches">
+          <label class="compareToggle">
+            <input id="compareMode" type="checkbox">
+            <span>
+              <strong>Werte vergleichen</strong>
+              <small>Mehrere Treffer im Verlauf anzeigen</small>
+            </span>
+          </label>
+          <div class="sectionTitle">
+            <span>Treffer</span>
+            <strong id="matchCount">0</strong>
+          </div>
+          <div id="matchList" class="matchList"></div>
+        </section>
+      </aside>
+
+      <section class="content">
+        <section class="summaryStrip">
+          <div>
+            <span>Ausgewählt</span>
+            <strong id="selectedName">Noch kein Wert gewählt</strong>
+          </div>
+          <div>
+            <span>Messungen</span>
+            <strong id="selectedCount">0</strong>
+          </div>
+          <div>
+            <span>Spanne</span>
+            <strong id="selectedRange">-</strong>
+          </div>
+          <div>
+            <span>Letzter Wert</span>
+            <strong id="latestValue">-</strong>
+          </div>
+        </section>
+
+        <section class="chartPanel">
+          <div class="chartHeader">
+            <div>
+              <h2>Verlauf</h2>
+              <p id="chartSubtitle">Wähle links einen Laborwert aus.</p>
+            </div>
+            <div class="panelActions">
+              <label class="toggle">
+                <input id="sameUnitOnly" type="checkbox" checked>
+                <span>Einheiten umrechnen</span>
+              </label>
+              <button id="chartZoomReset" class="zoomResetButton" type="button" hidden>Zoom zurücksetzen</button>
+              <button id="chartToggle" class="panelToggleIcon" type="button" aria-expanded="true" aria-label="Verlauf einklappen" title="Verlauf einklappen">
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M5.5 12.5 10 8l4.5 4.5"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <canvas id="historyChart" width="1200" height="460"></canvas>
+          <div id="chartTooltip" class="chartTooltip" hidden></div>
+          <div id="chartLegend" class="legend"></div>
+        </section>
+
+        <section class="tablePanel">
+          <div class="sectionTitle">
+            <span>Messwert-Historie</span>
+            <div class="panelActions">
+              <strong id="rowCount">0</strong>
+              <button id="tableToggle" class="panelToggleIcon" type="button" aria-expanded="true" aria-label="Messwert-Historie einklappen" title="Messwert-Historie einklappen">
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M5.5 12.5 10 8l4.5 4.5"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="tableWrap">
+            <table>
+              <thead>
+                <tr>
+                  <th><button class="sortButton" type="button" data-sort="date">Datum<span class="sortIcon"></span></button></th>
+                  <th><button class="sortButton" type="button" data-sort="value">Wert<span class="sortIcon"></span></button></th>
+                  <th><button class="sortButton" type="button" data-sort="name">Originalname<span class="sortIcon"></span></button></th>
+                  <th><button class="sortButton" type="button" data-sort="unit">Einheit<span class="sortIcon"></span></button></th>
+                  <th><button class="sortButton" type="button" data-sort="reference">Referenz<span class="sortIcon"></span></button></th>
+                  <th><button class="sortButton" type="button" data-sort="status">Bewertung<span class="sortIcon"></span></button></th>
+                  <th><button class="sortButton" type="button" data-sort="lab">Labor<span class="sortIcon"></span></button></th>
+                  <th><button class="sortButton" type="button" data-sort="source">Quelle<span class="sortIcon"></span></button></th>
+                  <th><button class="sortButton" type="button" data-sort="comment">Kommentar<span class="sortIcon"></span></button></th>
+                </tr>
+              </thead>
+              <tbody id="historyRows"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <section id="topicView" class="topicView appView" hidden>
+      <section class="topicHero">
+        <div>
+          <span id="topicEyebrow" class="topicEyebrow">Themenansicht</span>
+          <h2 id="topicTitle">Thema</h2>
+          <p id="topicSubtitle"></p>
+        </div>
+        <div id="topicStats" class="topicStats"></div>
+      </section>
+
+      <div class="topicGrid">
+        <section class="topicPanel topicPrimaryPanel">
+          <div class="sectionTitle">
+            <span>Im Blick</span>
+            <div class="topicHeaderActions">
+              <strong id="topicFocusCount">0</strong>
+              <div class="topicSort">
+                <button id="topicFocusSortButton" class="topicSortButton" type="button" aria-haspopup="menu" aria-expanded="false">
+                  Priorität
+                </button>
+                <div id="topicFocusSortMenu" class="topicSortMenu" role="menu" hidden>
+                  <button type="button" role="menuitem" data-topic-sort="priority">Priorität</button>
+                  <button type="button" role="menuitem" data-topic-sort="dateDesc">Datum neu zuerst</button>
+                  <button type="button" role="menuitem" data-topic-sort="dateAsc">Datum alt zuerst</button>
+                  <button type="button" role="menuitem" data-topic-sort="nameAsc">A bis Z</button>
+                  <button type="button" role="menuitem" data-topic-sort="nameDesc">Z bis A</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="topicFocusList" class="topicList"></div>
+        </section>
+
+        <section class="topicPanel">
+          <div class="sectionTitle">
+            <span>In Ordnung</span>
+            <strong id="topicGoodCount">0</strong>
+          </div>
+          <div id="topicGoodList" class="topicList compact"></div>
+        </section>
+
+        <section class="topicPanel">
+          <div class="sectionTitle">
+            <span>Kategorien</span>
+            <strong id="topicCategoryCount">0</strong>
+          </div>
+          <div id="topicCategoryList" class="topicCategoryList"></div>
+        </section>
+
+        <section class="topicPanel">
+          <div class="sectionTitle">
+            <span>Historie</span>
+            <strong id="topicTimelineCount">0</strong>
+          </div>
+          <div id="topicTimeline" class="topicTimeline"></div>
+        </section>
+      </div>
+
+      <section class="topicPanel topicTablePanel">
+        <div class="sectionTitle">
+          <span>Alle Werte im Thema</span>
+          <strong id="topicTableCount">0</strong>
+        </div>
+        <div class="topicTableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Datum</th>
+                <th>Marker</th>
+                <th>Wert</th>
+                <th>Bewertung</th>
+                <th>Kategorie</th>
+                <th>Quelle</th>
+              </tr>
+            </thead>
+            <tbody id="topicRows"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <section id="reportsView" class="reportsView appView" hidden>
+      <section class="topicHero">
+        <div>
+          <span class="topicEyebrow">Archiv</span>
+          <h2>Laborberichte</h2>
+          <p>Alle verknüpften PDF-Berichte chronologisch sortiert mit direktem Zugriff auf den jeweiligen Bericht.</p>
+        </div>
+        <div id="reportStats" class="topicStats"></div>
+      </section>
+
+      <section class="topicPanel reportsPanel">
+        <div class="sectionTitle">
+          <span>Chronologisch</span>
+          <strong id="reportCount">0</strong>
+        </div>
+        <div class="reportSearchBar" role="search">
+          <label class="reportSearchField" for="reportSearchInput">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="m20 20-4-4"></path>
+            </svg>
+            <input id="reportSearchInput" type="search" inputmode="search" autocomplete="off" placeholder="Berichte nach Labor, Wert oder Inhalt durchsuchen">
+          </label>
+          <span id="reportSearchStatus" class="reportSearchStatus" aria-live="polite"></span>
+        </div>
+        <div id="reportList" class="reportList"></div>
+      </section>
+    </section>
+
+    <section id="moduleView" class="moduleView appView" hidden>
+      <section class="topicHero">
+        <div>
+          <span id="moduleEyebrow" class="topicEyebrow">Bereich</span>
+          <h2 id="moduleTitle">Bereich</h2>
+          <p id="moduleSubtitle"></p>
+        </div>
+        <div id="moduleStats" class="topicStats"></div>
+      </section>
+
+      <section class="topicPanel modulePlaceholder">
+        <span id="moduleStatus" class="moduleStatus">Demnächst</span>
+        <h3 id="modulePlaceholderTitle">Noch im Aufbau</h3>
+        <p id="modulePlaceholderText"></p>
+        <div id="moduleSummary" class="moduleSummary"></div>
+        <div id="moduleDocumentList" class="moduleDocumentList"></div>
+        <a class="moduleBackLink" href="#home" data-view-link="home">Zur Übersicht</a>
+      </section>
+    </section>
+
+    <div id="topicHistoryModal" class="topicHistoryModal" hidden>
+      <section class="topicHistoryDialog" role="dialog" aria-modal="true" aria-labelledby="topicHistoryTitle">
+        <header class="topicHistoryHeader">
+          <div>
+            <span class="topicEyebrow">Marker-Historie</span>
+            <h2 id="topicHistoryTitle">Marker</h2>
+            <p id="topicHistorySubtitle"></p>
+          </div>
+          <div class="topicHistoryHeaderActions">
+            <button id="topicHistoryExplore" class="topicHistoryExplore" type="button">In großer Historie öffnen</button>
+            <strong id="topicHistoryCount">0 Werte</strong>
+            <button id="topicHistoryClose" class="topicHistoryClose" type="button" aria-label="Historie schließen" title="Historie schließen">
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M5 5l10 10M15 5 5 15"></path>
+              </svg>
+            </button>
+          </div>
+        </header>
+        <div id="topicHistorySummary" class="topicHistorySummary"></div>
+        <div id="topicHistoryChart" class="topicHistoryChart"></div>
+        <div id="topicHistoryRows" class="topicHistoryRows"></div>
+      </section>
+    </div>
+
+    <script src="./app.js?v=20260903-radiology-finding1"></script>
+  </body>
+</html>

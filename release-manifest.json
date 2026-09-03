@@ -1,0 +1,13 @@
+{
+  "generatedAt": "2026-09-03T10:31:31.140Z",
+  "encryptedCsv": "secure-data/lab-data.enc",
+  "encryptedDocumentIndex": "secure-data/document-index.enc",
+  "encryptedReportSearchIndex": "secure-data/report-search-index.enc",
+  "encryptedDocuments": {
+    "pdfs": 53,
+    "findings": 22,
+    "allergies": 2
+  },
+  "encryptedPdfs": 77,
+  "note": "Public release contains encrypted medical data only. Keep the password separate from this folder."
+}

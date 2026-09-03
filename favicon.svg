@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Dashboard Gesundheitsdaten">
+  <rect width="512" height="512" rx="118" fill="#174c3c"/>
+  <circle cx="372" cy="135" r="86" fill="none" stroke="#2d6855" stroke-width="28"/>
+  <g fill="none" stroke="#fffdf8" stroke-width="26" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M197 102h118"/>
+    <path d="M220 102v93l-72 126c-25 44 7 98 58 98h100c51 0 83-54 58-98l-72-126v-93"/>
+    <path d="M173 317c32-18 57 17 89 0 34-18 65-13 79 2"/>
+  </g>
+  <circle cx="122" cy="382" r="46" fill="#ef775c"/>
+</svg>
