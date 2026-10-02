@@ -1,4 +1,4 @@
-const APP_VERSION = "20260903-radiology-finding1";
+const APP_VERSION = "20261002-andromed-addendum1";
 const CSV_PATH = `../database/current/Labordatenbank_aktuell_Messwerte.csv?v=${APP_VERSION}`;
 const DOCUMENT_INDEX_PATH = `../database/current/Dokumentenindex.json?v=${APP_VERSION}`;
 const REPORT_SEARCH_INDEX_PATH = `../database/current/Laborbericht-Suchindex.json?v=${APP_VERSION}`;

@@ -805,6 +805,7 @@ h2 {
 }
 
 .allValuesTable th {
+  padding: 9px 10px;
   white-space: nowrap;
 }
 
@@ -1327,6 +1328,7 @@ h2 {
 }
 
 .topicPrimaryPanel {
+  overflow: visible;
   grid-row: span 2;
 }
 
@@ -1663,6 +1665,10 @@ h2 {
 .topicTableWrap td:nth-child(6) {
   max-width: 360px;
   overflow-wrap: anywhere;
+}
+
+.topicTableWrap th {
+  padding: 9px 10px;
 }
 
 .modalOpen {
