@@ -365,17 +365,6 @@ h2 {
   padding: 20px 22px;
 }
 
-.landingHero::before,
-.landingAction::before,
-.topicHero::before,
-.topicPanel::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 3px;
-  background: linear-gradient(90deg, var(--blueDark), var(--blue), var(--blueBright));
-}
-
 .landingHero > *,
 .landingAction > *,
 .topicHero > *,
@@ -587,7 +576,6 @@ h2 {
   gap: 9px;
   min-height: 112px;
   border: 1px solid var(--line);
-  border-left: 4px solid var(--blue);
   border-radius: 8px;
   background: linear-gradient(180deg, #ffffff, #f9fcff);
   color: var(--ink);
@@ -791,10 +779,10 @@ h2 {
 .allValuesTableWrap {
   max-height: min(66vh, 680px);
   overflow: auto;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: white;
-  box-shadow: inset 0 1px 0 rgba(0, 112, 186, 0.04);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
   scrollbar-gutter: stable;
   scrollbar-width: thin;
 }
@@ -1121,24 +1109,23 @@ h2 {
 
 .ageDelta {
   border: 1px solid var(--line);
-  border-left: 4px solid var(--blue);
   border-radius: 8px;
   background: white;
   padding: 13px;
 }
 
 .ageDelta.ok {
-  border-left-color: var(--green);
+  border-color: color-mix(in srgb, var(--green) 20%, var(--line));
   background: linear-gradient(90deg, var(--greenSoft), #ffffff 62%);
 }
 
 .ageDelta.open {
-  border-left-color: var(--amber);
+  border-color: color-mix(in srgb, var(--amber) 20%, var(--line));
   background: linear-gradient(90deg, var(--amberSoft), #ffffff 62%);
 }
 
 .ageDelta.attention {
-  border-left-color: var(--red);
+  border-color: color-mix(in srgb, var(--red) 20%, var(--line));
   background: linear-gradient(90deg, var(--redSoft), #ffffff 62%);
 }
 
@@ -1207,25 +1194,24 @@ h2 {
 .ageSourceItem {
   min-width: 0;
   border: 1px solid var(--line);
-  border-left: 4px solid var(--blue);
   border-radius: 8px;
   background: white;
   padding: 11px;
 }
 
 .ageSourceItem.manual {
-  border-left-color: var(--amber);
+  border-color: color-mix(in srgb, var(--amber) 20%, var(--line));
   background: linear-gradient(90deg, var(--amberSoft), #ffffff 70%);
 }
 
 .ageSourceItem.fallback {
-  border-left-color: var(--lineStrong);
+  border-color: var(--lineStrong);
   background:
     linear-gradient(90deg, rgba(93, 111, 133, 0.08), #ffffff 72%);
 }
 
 .ageSourceItem.missing {
-  border-left-color: var(--lineStrong);
+  border-color: var(--lineStrong);
   opacity: 0.82;
 }
 
@@ -1264,24 +1250,23 @@ h2 {
 .topicStat {
   min-width: 0;
   border: 1px solid rgba(0, 112, 186, 0.13);
-  border-left: 4px solid var(--blue);
   border-radius: 7px;
   background: linear-gradient(180deg, #ffffff, #f8fbff);
   padding: 10px 11px;
 }
 
 .topicStat.attention {
-  border-left-color: var(--red);
+  border-color: color-mix(in srgb, var(--red) 20%, var(--line));
   background: linear-gradient(180deg, #ffffff, var(--redSoft));
 }
 
 .topicStat.ok {
-  border-left-color: var(--green);
+  border-color: color-mix(in srgb, var(--green) 20%, var(--line));
   background: linear-gradient(180deg, #ffffff, var(--greenSoft));
 }
 
 .topicStat.open {
-  border-left-color: var(--amber);
+  border-color: color-mix(in srgb, var(--amber) 20%, var(--line));
   background: linear-gradient(180deg, #ffffff, var(--amberSoft));
 }
 
@@ -1470,7 +1455,6 @@ h2 {
 
 .topicItem {
   border: 1px solid var(--line);
-  border-left: 4px solid var(--blue);
   border-radius: 8px;
   background: white;
   padding: 0;
@@ -1478,17 +1462,17 @@ h2 {
 }
 
 .topicItem.attention {
-  border-left-color: var(--red);
+  border-color: color-mix(in srgb, var(--red) 20%, var(--line));
   background: linear-gradient(90deg, var(--redSoft), #ffffff 55%);
 }
 
 .topicItem.ok {
-  border-left-color: var(--green);
+  border-color: color-mix(in srgb, var(--green) 20%, var(--line));
   background: linear-gradient(90deg, var(--greenSoft), #ffffff 55%);
 }
 
 .topicItem.open {
-  border-left-color: var(--amber);
+  border-color: color-mix(in srgb, var(--amber) 20%, var(--line));
   background: linear-gradient(90deg, var(--amberSoft), #ffffff 55%);
 }
 
@@ -1656,9 +1640,9 @@ h2 {
   margin-top: 12px;
   max-height: 540px;
   overflow: auto;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: white;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
 .topicTableWrap td:nth-child(2),
@@ -1914,24 +1898,23 @@ h2 {
   grid-template-columns: minmax(140px, 0.35fr) minmax(0, 1fr);
   gap: 12px;
   border: 1px solid var(--line);
-  border-left: 4px solid var(--blue);
   border-radius: 8px;
   background: white;
   padding: 12px;
 }
 
 .topicHistoryRow.attention {
-  border-left-color: var(--red);
+  border-color: color-mix(in srgb, var(--red) 20%, var(--line));
   background: linear-gradient(90deg, var(--redSoft), #ffffff 62%);
 }
 
 .topicHistoryRow.ok {
-  border-left-color: var(--green);
+  border-color: color-mix(in srgb, var(--green) 20%, var(--line));
   background: linear-gradient(90deg, var(--greenSoft), #ffffff 62%);
 }
 
 .topicHistoryRow.open {
-  border-left-color: var(--amber);
+  border-color: color-mix(in srgb, var(--amber) 20%, var(--line));
   background: linear-gradient(90deg, var(--amberSoft), #ffffff 62%);
 }
 
@@ -2064,7 +2047,6 @@ h2 {
   align-items: center;
   gap: 14px;
   border: 1px solid var(--line);
-  border-left: 4px solid var(--blue);
   border-radius: 8px;
   background: white;
   padding: 13px;
@@ -2123,8 +2105,8 @@ h2 {
   display: grid;
   gap: 3px;
   margin-top: 9px;
-  border-left: 3px solid var(--coral);
-  border-radius: 0 6px 6px 0;
+  border: 1px solid color-mix(in srgb, var(--coral) 20%, var(--line));
+  border-radius: 6px;
   background: rgba(239, 119, 92, 0.08);
   color: var(--ink);
   padding: 8px 10px;
@@ -2533,7 +2515,6 @@ select:focus {
 
 .summaryStrip div {
   border: 1px solid rgba(0, 112, 186, 0.13);
-  border-left: 4px solid var(--blue);
   border-radius: 7px;
   background:
     linear-gradient(180deg, #ffffff, #f8fbff);
@@ -2591,15 +2572,6 @@ select:focus {
   min-width: 0;
   position: relative;
   overflow: hidden;
-}
-
-.chartPanel::before,
-.tablePanel::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 3px;
-  background: linear-gradient(90deg, var(--blueDark), var(--blue), var(--blueBright));
 }
 
 .chartHeader {
@@ -2846,10 +2818,10 @@ canvas {
   margin-top: 12px;
   max-height: 430px;
   overflow: auto;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: white;
-  box-shadow: inset 0 1px 0 rgba(0, 112, 186, 0.04);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 table {
@@ -3199,12 +3171,10 @@ tbody tr.selectedRow td {
   .sidebar > .field:first-of-type {
     order: 0;
     margin-bottom: 0;
-    border-left: 4px solid var(--blue);
   }
 
   .sidebar > .dateFilter {
     order: 0;
-    border-left: 4px solid rgba(0, 112, 186, 0.42);
   }
 
   .sidebar > .matches {
@@ -3681,16 +3651,6 @@ h2,
     var(--panel);
 }
 
-.landingHero::before,
-.landingAction::before,
-.topicHero::before,
-.topicPanel::before,
-.chartPanel::before,
-.tablePanel::before {
-  height: 1px;
-  background: var(--ink);
-}
-
 .landingAction,
 .documentCard,
 .reportCard,
@@ -3954,7 +3914,7 @@ tbody tr:hover td {
 .topicStat.attention,
 .topicItem.attention,
 .ageDelta.attention {
-  border-left-color: var(--red);
+  border-color: color-mix(in srgb, var(--red) 20%, var(--line));
   background:
     linear-gradient(90deg, var(--redSoft), var(--panel) 62%);
 }
@@ -3962,7 +3922,7 @@ tbody tr:hover td {
 .topicStat.ok,
 .topicItem.ok,
 .ageDelta.ok {
-  border-left-color: var(--green);
+  border-color: color-mix(in srgb, var(--green) 20%, var(--line));
   background:
     linear-gradient(90deg, var(--greenSoft), var(--panel) 62%);
 }
@@ -3970,20 +3930,9 @@ tbody tr:hover td {
 .topicStat.open,
 .topicItem.open,
 .ageDelta.open {
-  border-left-color: var(--amber);
+  border-color: color-mix(in srgb, var(--amber) 20%, var(--line));
   background:
     linear-gradient(90deg, var(--amberSoft), var(--panel) 62%);
-}
-
-.documentCard,
-.reportCard,
-.topicItem,
-.ageSourceItem,
-.summaryStrip div,
-.topicStat,
-.sidebar > .field:first-of-type,
-.sidebar > .dateFilter {
-  border-left-width: 1px;
 }
 
 .landingHeroStats strong,
@@ -4258,15 +4207,6 @@ select:focus-visible {
   box-shadow: var(--shadow);
 }
 
-.landingHero::before,
-.landingAction::before,
-.topicHero::before,
-.topicPanel::before,
-.chartPanel::before,
-.tablePanel::before {
-  display: none;
-}
-
 .landingHero h2 {
   font-size: 34px;
 }
@@ -4483,7 +4423,8 @@ input[type="radio"] {
   color: var(--blueDark);
 }
 
-.summaryStrip {
+.summaryStrip,
+.content > .summaryStrip {
   padding: 0;
   border: 0;
   border-radius: 0;
@@ -4493,7 +4434,6 @@ input[type="radio"] {
 
 .summaryStrip div {
   border-color: rgba(23, 76, 60, 0.10);
-  border-left-color: var(--blue);
   background: var(--panelSoft);
 }
 
@@ -4515,9 +4455,9 @@ canvas {
 .tableWrap,
 .topicTableWrap,
 .allValuesTableWrap {
-  border-color: var(--line);
-  border-radius: 18px;
-  background: var(--panel);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
   box-shadow: none;
 }
 
@@ -4541,21 +4481,21 @@ tbody tr:hover td {
 .topicStat.attention,
 .topicItem.attention,
 .ageDelta.attention {
-  border-left-color: var(--red);
+  border-color: color-mix(in srgb, var(--red) 20%, var(--line));
   background: var(--redSoft);
 }
 
 .topicStat.ok,
 .topicItem.ok,
 .ageDelta.ok {
-  border-left-color: var(--green);
+  border-color: color-mix(in srgb, var(--green) 20%, var(--line));
   background: var(--greenSoft);
 }
 
 .topicStat.open,
 .topicItem.open,
 .ageDelta.open {
-  border-left-color: var(--amber);
+  border-color: color-mix(in srgb, var(--amber) 20%, var(--line));
   background: var(--amberSoft);
 }
 
@@ -4690,7 +4630,7 @@ tbody tr:hover td {
   }
 
   .sidebar > .dateFilter {
-    border-left-color: var(--mintDeep);
+    border-color: var(--line);
   }
 
   .topicHero,
